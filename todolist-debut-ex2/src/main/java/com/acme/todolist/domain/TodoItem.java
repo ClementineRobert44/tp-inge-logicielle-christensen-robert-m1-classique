@@ -30,6 +30,22 @@ public class TodoItem {
 	public String getContent() {
 		return this.content;
 	}
+	
+	public Boolean compareContent(String contentToCompare) {
+		if(contentToCompare == this.content) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public Boolean isLessThan15Characters() {
+		if(this.content.length() > 15) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 
 	/**
 	 * Constructeur vide imposé par JPA, ne pas utiliser
@@ -49,7 +65,7 @@ public class TodoItem {
 		return "TodoItem [id=" + id + ", time=" + time + ", content=" + content + "]";
 	}
 
-	boolean isLate() {
+	public boolean isLate() {
 		return Instant.now().isAfter(getTime().plus(1, ChronoUnit.DAYS));
 	}
 
