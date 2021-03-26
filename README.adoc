@@ -138,3 +138,39 @@ _Temps estimé : 20 mins_
 - Pour tester l'adapter REST, utiliser l'annotation `@WebMvcTest(controllers = TodoListController.class)`
 - Voir cette https://spring.io/guides/gs/testing-web/[documentation]
 =====
+
+
+Ex 3 du TD : 
+
+class ClientMail{
+  SmtpServer serverMail;
+  MessageFormatter messageFormatter;
+
+  @Inject
+  public ClientMail(SmtpServer serverMail, MessageFormatter messageFormatter){
+    this.serverMail = serverMail;
+    this.messageFormatter = messageFormatter;
+  }
+
+  public void envoieMail(Mail mail){
+      this.serverMail.envoyer(this.messageFormatter.format(mail));
+  }
+
+  class SmtpServer{
+      Connexion connexion;
+
+      @Inject
+      public SmtpServer(Connexion connexion){
+        this.connexion = connexion;
+      }
+
+      public void envoyer(Mail mail){
+        connexion.open();
+        connexion.write(formater.format(mail));
+      }
+  }
+}
+
+Non comme il manipule des beans on ne doit pas injecter l'objet.
+
+
